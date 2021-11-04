@@ -1,0 +1,21 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.RomanceBook>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "Master.cshtml";
+}
+
+
+<div class="container">
+    <div class="card" style="width: 20rem; margin-bottom: 250px;">
+      <img src="@Model.BookImage.Url()" class="card-img-top" alt="...">
+      
+      <div class="card-body">
+        <h5 class="card-title">@Model.Value("bookTitle")</h5>
+        <h2 class="card-title">@Model.Value("bookAuthor")</h2>
+        <p class="card-text">@Model.Value("bookDescription")</p>
+      </div>
+      
+      <a href="#" class="btn btn-primary">Buy</a>
+    </div>
+</div>

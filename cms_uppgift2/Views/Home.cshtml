@@ -1,0 +1,125 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Home>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    Layout = "Master.cshtml";
+}
+
+
+
+@{
+    var selection = Umbraco.Content(2114)
+    .Descendants()
+    .Where(x => x.IsVisible() && (x.IsDocumentType("economicsBook") ||
+    x.IsDocumentType("historyBooks") ||
+    x.IsDocumentType("romanceBook")))
+    .OrderByDescending(x => x.CreateDate);
+}
+
+<div class="container">
+        
+        <div class="row" style="margin-bottom: 250px;">
+        	@foreach (var item in selection)
+            {
+                var image = item.Value<IPublishedContent>("bookImage");
+
+            		<div class="card m-3" style="width: 15rem;">
+                          <img src="@image.Url()" class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <h3 class="card-title">@item.Value("bookTitle")</h3>
+                            <h6 class="card-title">@item.Value("bookAuthor")</h6>
+                          </div>
+                          
+                          <div class="d-flex justify-content-around">
+                              <a href="#" style="bottom: 0;" class="btn btn-primary w-50 m-2">Buy</a>
+                              <a href="@item.Url()" style="bottom: 0;" class="btn btn-secondary w-50 m-2">Details</a>
+                          </div>
+                          
+                          
+                    </div>
+            }
+	    </div>
+        
+    
+</div>
+    
+	
+	
+	
+<!-----------------------------------------------------------------------carousel----->
+<div class="bg-secondary">
+    
+    <div class="container">
+        <div id="carouselExampleControls" class="carousel slide" style="margin-bottom: 250px;" data-bs-ride="carousel">
+
+        @{
+            var books = Umbraco.Content(2114)
+            .Descendants()
+            .Where(x => x.IsVisible() && (x.IsDocumentType("economicsBook") ||
+            x.IsDocumentType("historyBooks") ||
+            x.IsDocumentType("romanceBook")))
+            .OrderBy(i => Guid.NewGuid()).ToList().Take(4);
+        }
+
+	    <div class="carousel-inner">
+              <div class="carousel-inner">
+                  
+                 
+                    @{
+                      var bookList = books.ToList();
+                    }
+                    <div class="carousel-item active">
+                        <div class="d-flex justify-content-center" style="height: 15rem;">
+                            @{
+                                var image0 = bookList[0].Value<IPublishedContent>("bookImage");
+                            }
+                            <div><img src="@image0.Url()" class="d-block w-100" alt="..."></div>
+                            <div class="card m-3" style="width: 15rem;">
+                                <div class="card-body">
+                                    <h3 class="card-title">@bookList[0].Value("bookTitle")</h3>
+                                    <h6 class="card-title">@bookList[0].Value("bookAuthor")</h6>
+                                </div>
+                                <div class="d-flex justify-content-around">
+                                    <a href="#" style="bottom: 0;" class="btn btn-primary w-50 m-2">Buy</a>
+                                    <a href="@bookList[0].Url()" style="bottom: 0;" class="btn btn-secondary w-50 m-2">Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 @for (int i = 1; i < books.Count(); i++)
+                 {                 
+                    <div class="carousel-item">
+                        <div class="d-flex justify-content-center" style="height: 15rem;">
+                            @{
+                                var image1 = bookList[i].Value<IPublishedContent>("bookImage");
+                            }
+                            <div><img src="@image1.Url()" class="d-block w-100" alt="..."></div>
+                            <div class="card m-3" style="width: 15rem;">
+                                <div class="card-body">
+                                    <h3 class="card-title">@bookList[i].Value("bookTitle")</h3>
+                                    <h6 class="card-title">@bookList[i].Value("bookAuthor")</h6>
+                                </div>
+                                <div class="d-flex justify-content-around">
+                                    <a href="#" style="bottom: 0;" class="btn btn-primary w-50 m-2">Buy</a>
+                                    <a href="@bookList[i].Url()" style="bottom: 0;" class="btn btn-secondary w-50 m-2">Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  }
+                  
+                </div>   
+              
+              
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon text-black" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next text-black" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+                </button>
+        </div>
+        </div>
+    </div>
+</div>

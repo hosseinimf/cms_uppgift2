@@ -1,0 +1,86 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+@using Microsoft.AspNetCore.Http.Extensions
+@using Umbraco.Cms.Web.Common.Models
+@using Umbraco.Cms.Web.Website.Controllers
+@using Umbraco.Extensions
+
+@{
+    var loginModel = new LoginModel();
+    // You can modify this to redirect to a different URL instead of the current one
+    loginModel.RedirectUrl = null;
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+
+<div class="login-form w-50 container">
+
+    @using (Html.BeginUmbracoForm<UmbLoginController>(
+        "HandleLogin", new { RedirectUrl = loginModel.RedirectUrl })) {
+
+        <h4>Log in with a local account.</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="mb-3">
+            <label asp-for="@loginModel.Username" class="form-label"></label>
+            <input asp-for="@loginModel.Username" class="form-control" />
+            <span asp-validation-for="@loginModel.Username" class="form-text text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="@loginModel.Password" class="form-label"></label>
+            <input asp-for="@loginModel.Password" class="form-control" />
+            <span asp-validation-for="@loginModel.Password" class="form-text text-danger"></span>
+        </div>
+        <div class="mb-3 form-check">
+            <input asp-for="@loginModel.RememberMe" class="form-check-input">
+            <label asp-for="@loginModel.RememberMe" class="form-check-label">
+                @Html.DisplayNameFor(m => loginModel.RememberMe)
+            </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Log in</button>
+    }
+    
+    
+<!---member username and password-->
+  <h3 class="text-success mt-3">Man kan koppera inloggningsuppgifter här nedan!!!</h3>
+  <div style="margin-bottom: 250px;">
+      <div class="row m-5" style="margin-bottom: 250px;">
+        <div class="col bg-secondary">user name</div>
+        <div class="col bg-secondary">password</div>
+        <div class="w-100"></div>
+        <div class="col">premiummember</div>
+        <div class="col">cms1234567</div>
+        <div class="w-100"></div>
+        <div class="col">standardmember</div>
+        <div class="col">cms1234567</div>
+        
+        <div class="w-100"></div>
+        <div class="col bg-secondary">username and password for back office</div>
+        <div class="col bg-secondary">..</div>
+        <div class="w-100"></div>
+        <div class="col">admin@hosseini.com</div>
+        <div class="col">cms1234567</div>
+        <div class="w-100"></div>
+        <div class="col">editor@hosseini.com</div>
+        <div class="col">cms1234567</div>
+        <div class="w-100"></div>
+        <div class="col">economywriter@hosseini.com</div>
+        <div class="col">cms1234567</div>
+        <div class="w-100"></div>
+        <div class="col">romancewriter@hosseini.com</div>
+        <div class="col">cms1234567</div>
+        <div class="w-100"></div>
+        <div class="col">historywriter@hosseini.com</div>
+        <div class="col">cms1234567</div>
+        <div class="w-100"></div>
+        <div class="col">mainwriter@hosseini.com</div>
+        <div class="col">cms1234567</div>
+      </div>
+  </div>
+      
+
+
+</div><!---container end-->

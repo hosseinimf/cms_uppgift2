@@ -1,0 +1,36 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ContactUs>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "Master.cshtml";
+}
+
+
+<div class="container" style="margin-bottom: 250px;">
+  
+  <div class="d-flex justify-content-around mt-5">
+      <form class="">
+      <div class="form-group mb-2">
+        
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Name">
+      </div>
+      <div class="form-group mb-2">
+        
+        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Email">
+      </div>
+      <div class="form-group mb-2">
+        
+        <textarea class="form-control" rows="3" placeholder="Message" required></textarea>
+      </div>
+      <button type="button" class="btn btn-secondary">Send</button>
+       </form>
+      <div class="">
+          <img src="@Model.ContactUsImage.Url()">
+      </div>
+      
+      
+  </div>
+  
+  
+</div>
+
